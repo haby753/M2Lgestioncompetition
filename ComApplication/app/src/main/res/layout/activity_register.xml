@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+  <EditText
+      android:id="@+id/editTextEmail"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/username_hint"
+      android:inputType="textEmailAddress"
+      tools:ignore="MissingConstraints" />
+
+  <EditText
+      android:id="@+id/editTextPassword"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/password_hint"
+      android:inputType="textPassword"
+      android:layout_marginTop="8dp"
+      tools:ignore="MissingConstraints" />
+
+  <EditText
+      android:id="@+id/editTextNom"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/nom"
+      android:inputType="text"
+      android:layout_marginTop="8dp"
+      tools:ignore="MissingConstraints" />
+
+  <EditText
+      android:id="@+id/editTextPrenom"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/prenom"
+      android:inputType="text"
+      android:layout_marginTop="8dp"
+      tools:ignore="MissingConstraints" />
+
+  <Button
+      android:id="@+id/buttonRegister"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/register"
+      android:layout_marginTop="16dp"
+      android:layout_gravity="center_horizontal"
+      tools:ignore="MissingConstraints" />  <!-- Centre le bouton horizontalement -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
