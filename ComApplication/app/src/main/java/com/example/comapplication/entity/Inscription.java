@@ -1,52 +1,49 @@
 package com.example.comapplication.entity;
 
-public class Inscription {
+import java.io.Serializable;
+import java.time.LocalDate;
 
-    private int id;
-    private int id_user ;
-    private int id_equipe ;
-    private int id_competition;
-    private String date;
+public class Inscription implements Serializable {
+
+    private int id_inscription;
+    private User id_user ;
+    private Competition id_competition;
+    private LocalDate datedecompetition;
     private String statut ;
 
+
     public int getId() {
-        return id;
+        return id_inscription;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_inscription = id;
     }
 
-    public int getId_user() {
+    public User getId_user() {
         return id_user;
     }
 
-    public void setId_user(int id_user) {
+    public void setId_user(User id_user) {
         this.id_user = id_user;
     }
 
-    public int getId_equipe() {
-        return id_equipe;
-    }
 
-    public void setId_equipe(int id_equipe) {
-        this.id_equipe = id_equipe;
-    }
 
-    public int getId_competition() {
+    public Competition getId_competition() {
         return id_competition;
     }
 
-    public void setId_competition(int id_competition) {
+    public void setId_competition(Competition id_competition) {
         this.id_competition = id_competition;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDate getDate() {
+        return datedecompetition;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate(LocalDate date) {
+        this.datedecompetition = date;
     }
 
     public String getStatut() {
@@ -55,5 +52,14 @@ public class Inscription {
 
     public void setStatut(String statut) {
         this.statut = statut;
+    }
+
+    public void setId_user(int user) {
+    }
+
+    public void setId_competition(int idCompetition) {
+    }
+
+    public void setDate(String datedecompetition) {
     }
 }

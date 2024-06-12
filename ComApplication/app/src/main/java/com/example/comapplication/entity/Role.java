@@ -1,12 +1,14 @@
 package com.example.comapplication.entity;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
     public int getId() {
-        return id;
+        return id_role;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_role) {
+        this.id_role = id_role;
     }
 
     public String getRoleName() {
@@ -17,7 +19,7 @@ public class Role {
         this.roleName = roleName;
     }
 
-    private int id;
+    private int id_role;
     private String roleName;
 
 // ajoutez les getters et les setters

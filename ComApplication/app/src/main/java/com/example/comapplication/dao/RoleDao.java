@@ -11,12 +11,12 @@ import com.example.comapplication.entity.Role ;
 public class RoleDao {
 
     // Create
-    public void saveRole(Role role) {
+    public  static void saveRole(Role role) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("roleName", role.getRoleName());
         db.insert("Role", null, values);
-        db.close();
+     //   db.close();
     }
 
     // Read
@@ -33,7 +33,7 @@ public class RoleDao {
         }
 
         cursor.close();
-        db.close();
+       // db.close();
         return role;
     }
 
@@ -44,7 +44,7 @@ public class RoleDao {
         values.put("roleName", role.getRoleName());
 
         int rowsAffected = db.update("Role", values, "id=?", new String[]{String.valueOf(role.getId())});
-        db.close();
+      //  db.close();
         return rowsAffected;
     }
 
@@ -52,7 +52,7 @@ public class RoleDao {
     public void deleteRole(int roleId) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         db.delete("Role", "id=?", new String[]{String.valueOf(roleId)});
-        db.close();
+      //  db.close();
     }
 }
 

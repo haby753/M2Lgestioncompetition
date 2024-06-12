@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UserDao {
 
-    private RoleDao roleDao;
+    private static RoleDao roleDao;
 
 
     // Create
@@ -27,7 +27,7 @@ public class UserDao {
         values.put("prenom", user.getPrenom());
         values.put("roleId", user.getRole().getId());
         db.insert("User", null, values);
-        db.close();
+        //db.close();
     }
 
     // Read (Single User)
@@ -51,12 +51,12 @@ public class UserDao {
         }
 
         cursor.close();
-        db.close();
+       // db.close();
         return user;
     }
     // Read (All Users)
     @SuppressLint("Range")
-    public List<User> findAllUsers() {
+    public static List<User> findAllUsers() {
         List<User> users = new ArrayList<>();
         SQLiteDatabase db = MyApplication.getDbHelper().getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM User", null);
@@ -79,13 +79,13 @@ public class UserDao {
         }
 
         cursor.close();
-        db.close();
+       // db.close();
 
         return users;
     }
 
     // Update
-    public int updateUser(User user) {
+    public static int updateUser(User user) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("email", user.getEmail());
@@ -93,19 +93,16 @@ public class UserDao {
         values.put("nom", user.getNom());
         values.put("prenom", user.getPrenom());
         values.put("roleId", user.getRole().getId());
-
         int rowsAffected = db.update("User", values, "id=?", new String[]{String.valueOf(user.getId())});
-        db.close();
+       // db.close();
         return rowsAffected;
     }
-
     // Delete
-    public void deleteUser(int userId) {
+    public static void deleteUser(int userId) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         db.delete("User", "id=?", new String[]{String.valueOf(userId)});
-        db.close();
+       // db.close();
     }
-
     @SuppressLint("Range")
     public static User findUserByEmailAndPassword(String email, String password) {
         SQLiteDatabase db = MyApplication.getDbHelper().getReadableDatabase();
@@ -113,7 +110,6 @@ public class UserDao {
         String[] columns = new String[]{"id", "email", "password", "nom", "prenom", "roleId"};
         String selection = "email = ? AND password = ?";
         String[] selectionArgs = new String[]{email, password};
-
         Cursor cursor = db.query("User", columns, selection, selectionArgs, null, null, null);
 
         User user = null;
@@ -132,7 +128,7 @@ public class UserDao {
         }
 
         cursor.close();
-        db.close();
+     //   db.close();
         return user;
     }
 

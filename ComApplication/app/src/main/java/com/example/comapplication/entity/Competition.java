@@ -1,6 +1,8 @@
 package com.example.comapplication.entity;
 
-public class Competition {
+import java.io.Serializable;
+
+public class Competition implements Serializable {
 
     private int id ;
     private String nom ;
@@ -13,8 +15,8 @@ public class Competition {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_competition) {
+        this.id = id_competition;
     }
 
     public String getNom() {
@@ -56,5 +58,7 @@ public class Competition {
     public void setNombredeparticipant(Number nombredeparticipant) {
         this.nombredeparticipant = nombredeparticipant;
     }
+
+
 }
 

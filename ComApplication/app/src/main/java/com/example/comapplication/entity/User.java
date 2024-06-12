@@ -1,8 +1,10 @@
 package com.example.comapplication.entity;
 
-public class User {
+import java.io.Serializable;
 
-    private int id;
+public class User implements Serializable {
+
+    private int id_user;
     private String email;
     private String password;
     private String nom ;
@@ -10,11 +12,11 @@ public class User {
     private Role role;
 
     public int getId() {
-        return id;
+        return id_user;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_user = id;
     }
 
     public String getEmail() {

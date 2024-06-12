@@ -19,7 +19,7 @@ public class EquipeDao {
         ContentValues values = new ContentValues();
         values.put("nom", equipe.getNom());
         db.insert("Equipe", null, values);
-        db.close();
+       // db.close();
     }
 
     // Read (Single Equipe)
@@ -36,7 +36,7 @@ public class EquipeDao {
         }
 
         cursor.close();
-        db.close();
+      //  db.close();
         return equipe;
     }
 
@@ -57,7 +57,7 @@ public class EquipeDao {
         }
 
         cursor.close();
-        db.close();
+       // db.close();
 
         return equipes;
     }
@@ -69,7 +69,7 @@ public class EquipeDao {
         values.put("nom", equipe.getNom());
 
         int rowsAffected = db.update("Equipe", values, "id_equipe=?", new String[]{String.valueOf(equipe.getId())});
-        db.close();
+     //   db.close();
         return rowsAffected;
     }
 
@@ -77,6 +77,6 @@ public class EquipeDao {
     public void deleteEquipe(int equipeId) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         db.delete("Equipe", "id_equipe=?", new String[]{String.valueOf(equipeId)});
-        db.close();
+      //  db.close();
     }
 }

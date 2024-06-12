@@ -1,19 +1,21 @@
 package com.example.comapplication.entity;
 
-public class Club {
+import java.io.Serializable;
 
-    private int id;
+public class Club  implements Serializable {
+
+    private int id_club;
     private String nom ;
-    private String adresse ;
+    private String  adresse ;
     private String contact ;
     private String categorie ;
 
     public int getId() {
-        return id;
+        return id_club;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_clud) {
+        this.id_club = id_clud;
     }
 
     public String getNom() {

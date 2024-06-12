@@ -9,27 +9,30 @@ import com.example.comapplication.MyApplication;
 import com.example.comapplication.entity.Inscription;
 import com.example.comapplication.entity.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InscriptionDao {
 
     // Create
-    public void saveInscription(Inscription inscription) {
+    @SuppressLint("NewApi")
+    public static Long saveInscription(Inscription inscription) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id_user", inscription.getId_user());
-        values.put("id_equipe", inscription.getId_equipe());
-        values.put("id_competition", inscription.getId_competition());
-        values.put("date", inscription.getDate());
-        values.put("statut", inscription.getStatut());
-        db.insert("Inscription", null, values);
-        db.close();
+        values.put("id_user", inscription.getId_user().getId());
+
+        values.put("id_competition", inscription.getId_competition().getId());
+        values.put("date", String.valueOf(LocalDate.now()));
+        values.put("statut", "VALIDER");
+
+        return  db.insert("Inscription", null, values);
+       // db.close();
     }
 
     // Read (Single Inscription)
     @SuppressLint("Range")
-    public Inscription findInscriptionById(int inscriptionId) {
+    public static Inscription findInscriptionById(int inscriptionId) {
         SQLiteDatabase db = MyApplication.getDbHelper().getReadableDatabase();
         Cursor cursor = db.query("Inscription", null, "id_inscription=?", new String[]{String.valueOf(inscriptionId)}, null, null, null);
 
@@ -37,21 +40,21 @@ public class InscriptionDao {
         if (cursor.moveToFirst()) {
             inscription = new Inscription();
             inscription.setId(cursor.getInt(cursor.getColumnIndex("id_inscription")));
-            inscription.setId_user(cursor.getInt(cursor.getColumnIndex("id_user")));
-            inscription.setId_equipe(cursor.getInt(cursor.getColumnIndex("id_equipe")));
+            inscription.setId_user(cursor.getInt(cursor.getColumnIndex("user")));
+
             inscription.setId_competition(cursor.getInt(cursor.getColumnIndex("id_competition")));
-            inscription.setDate(cursor.getString(cursor.getColumnIndex("date")));
+            inscription.setDate(cursor.getString(cursor.getColumnIndex("datedecompetition")));
             inscription.setStatut(cursor.getString(cursor.getColumnIndex("statut")));
         }
 
         cursor.close();
-        db.close();
+      //  db.close();
         return inscription;
     }
 
     // Read (All Inscriptions)
     @SuppressLint("Range")
-    public List<Inscription> findAllInscriptions() {
+    public static List<Inscription> findAllInscriptions() {
         List<Inscription> inscriptions = new ArrayList<>();
         SQLiteDatabase db = MyApplication.getDbHelper().getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Inscription", null);
@@ -61,7 +64,6 @@ public class InscriptionDao {
                 Inscription inscription = new Inscription();
                 inscription.setId(cursor.getInt(cursor.getColumnIndex("id_inscription")));
                 inscription.setId_user(cursor.getInt(cursor.getColumnIndex("id_user")));
-                inscription.setId_equipe(cursor.getInt(cursor.getColumnIndex("id_equipe")));
                 inscription.setId_competition(cursor.getInt(cursor.getColumnIndex("id_competition")));
                 inscription.setDate(cursor.getString(cursor.getColumnIndex("date")));
                 inscription.setStatut(cursor.getString(cursor.getColumnIndex("statut")));
@@ -71,7 +73,7 @@ public class InscriptionDao {
         }
 
         cursor.close();
-        db.close();
+      //  db.close();
 
         return inscriptions;
     }
@@ -80,14 +82,12 @@ public class InscriptionDao {
     public int updateInscription(Inscription inscription) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id_user", inscription.getId_user());
-        values.put("id_equipe", inscription.getId_equipe());
-        values.put("id_competition", inscription.getId_competition());
-        values.put("date", inscription.getDate());
+
+        values.put("date", String.valueOf(inscription.getDate()));
         values.put("statut", inscription.getStatut());
 
         int rowsAffected = db.update("Inscription", values, "id_inscription=?", new String[]{String.valueOf(inscription.getId())});
-        db.close();
+     //   db.close();
         return rowsAffected;
     }
 
@@ -95,7 +95,7 @@ public class InscriptionDao {
     public void deleteInscription(int inscriptionId) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         db.delete("Inscription", "id_inscription=?", new String[]{String.valueOf(inscriptionId)});
-        db.close();
+       // db.close();
     }
 
 }

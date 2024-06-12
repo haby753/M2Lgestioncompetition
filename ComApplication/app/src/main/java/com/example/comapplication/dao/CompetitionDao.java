@@ -14,7 +14,7 @@ import java.util.List;
 public class CompetitionDao {
 
     // Create
-    public void saveCompetition(Competition competition) {
+    public static void saveCompetition(Competition competition) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nom", competition.getNom());
@@ -23,12 +23,12 @@ public class CompetitionDao {
         values.put("datedefin", competition.getDatedefin());
         values.put("nombredeparticipant", competition.getNombredeparticipant());
         db.insert("Competition", null, values);
-        db.close();
+       // db.close();
     }
 
     // Read (Single Competition)
     @SuppressLint("Range")
-    public Competition findCompetitionById(int competitionId) {
+    public static Competition findCompetitionById(int competitionId) {
         SQLiteDatabase db = MyApplication.getDbHelper().getReadableDatabase();
         Cursor cursor = db.query("Competition", null, "id_competition=?", new String[]{String.valueOf(competitionId)}, null, null, null);
 
@@ -44,13 +44,13 @@ public class CompetitionDao {
         }
 
         cursor.close();
-        db.close();
+      //  db.close();
         return competition;
     }
 
     // Read (All Competitions)
     @SuppressLint("Range")
-    public List<Competition> findAllCompetitions() {
+    public static List<Competition> findAllCompetitions() {
         List<Competition> competitions = new ArrayList<>();
         SQLiteDatabase db = MyApplication.getDbHelper().getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Competition", null);
@@ -70,13 +70,13 @@ public class CompetitionDao {
         }
 
         cursor.close();
-        db.close();
+       // db.close();
 
         return competitions;
     }
 
     // Update
-    public int updateCompetition(Competition competition) {
+    public static int updateCompetition(Competition competition) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nom", competition.getNom());
@@ -86,14 +86,14 @@ public class CompetitionDao {
         values.put("nombredeparticipant", competition.getNombredeparticipant());
 
         int rowsAffected = db.update("Competition", values, "id_competition=?", new String[]{String.valueOf(competition.getId())});
-        db.close();
+        //db.close();
         return rowsAffected;
     }
 
     // Delete
-    public void deleteCompetition(int competitionId) {
+    public static void deleteCompetition(int competitionId) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         db.delete("Competition", "id_competition=?", new String[]{String.valueOf(competitionId)});
-        db.close();
+        //db.close();
     }
 }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.comapplication.MainActivity;
+import com.example.comapplication.dao.RoleDao;
 import com.example.comapplication.dao.UserDao;
 import com.example.comapplication.entity.User;
 
@@ -52,8 +53,10 @@ public class RegisterActivity extends AppCompatActivity {
         newUser.setPassword(password); // Pensez à hasher le mot de passe pour la sécurité
         newUser.setNom(nom);
         newUser.setPrenom(prenom);
-
+        newUser.setRole(RoleDao.findRoleById(1));
         UserDao.saveUser(newUser);
+
+
 
 
 

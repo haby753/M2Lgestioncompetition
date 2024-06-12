@@ -18,11 +18,11 @@ public class ClubDao {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nom", club.getNom());
-        values.put("adresse", club.getAdresse());
+        values.put("address", club.getAdresse());
         values.put("contact", club.getContact());
-        values.put("categorie", club.getCategorie());
+        values.put("categories", club.getCategorie());
         db.insert("Club", null, values);
-        db.close();
+        //db.close();
     }
 
     // Read (Single Club)
@@ -36,13 +36,13 @@ public class ClubDao {
             club = new Club();
             club.setId(cursor.getInt(cursor.getColumnIndex("id")));
             club.setNom(cursor.getString(cursor.getColumnIndex("nom")));
-            club.setAdresse(cursor.getString(cursor.getColumnIndex("adresse")));
+            club.setAdresse(cursor.getString(cursor.getColumnIndex("address")));
             club.setContact(cursor.getString(cursor.getColumnIndex("contact")));
-            club.setCategorie(cursor.getString(cursor.getColumnIndex("categorie")));
+            club.setCategorie(cursor.getString(cursor.getColumnIndex("categories")));
         }
 
         cursor.close();
-        db.close();
+        //db.close();
         return club;
     }
 
@@ -58,16 +58,16 @@ public class ClubDao {
                 Club club = new Club();
                 club.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 club.setNom(cursor.getString(cursor.getColumnIndex("nom")));
-                club.setAdresse(cursor.getString(cursor.getColumnIndex("adresse")));
+                club.setAdresse(cursor.getString(cursor.getColumnIndex("address")));
                 club.setContact(cursor.getString(cursor.getColumnIndex("contact")));
-                club.setCategorie(cursor.getString(cursor.getColumnIndex("categorie")));
+                club.setCategorie(cursor.getString(cursor.getColumnIndex("categories")));
 
                 clubs.add(club);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
-        db.close();
+        //db.close();
 
         return clubs;
     }
@@ -77,12 +77,12 @@ public class ClubDao {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nom", club.getNom());
-        values.put("adresse", club.getAdresse());
+        values.put("address", club.getAdresse());
         values.put("contact", club.getContact());
-        values.put("categorie", club.getCategorie());
+        values.put("categories", club.getCategorie());
 
         int rowsAffected = db.update("Club", values, "id=?", new String[]{String.valueOf(club.getId())});
-        db.close();
+       // db.close();
         return rowsAffected;
     }
 
@@ -90,6 +90,6 @@ public class ClubDao {
     public void deleteClub(int clubId) {
         SQLiteDatabase db = MyApplication.getDbHelper().getWritableDatabase();
         db.delete("Club", "id=?", new String[]{String.valueOf(clubId)});
-        db.close();
+       // db.close();
     }
 }

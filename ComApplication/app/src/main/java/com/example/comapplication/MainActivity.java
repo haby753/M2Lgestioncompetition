@@ -39,14 +39,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 login();
             }
+
+
+
+        });
+
+        RegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
         });
     }
-
-     RegisterButton.setOnClickListener(new View.OnClickListener() {
-        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish(); // Termine MainActivity pour empêcher le retour à l'écran de connexion
-}
 
     private void login() {
         String email = emailEditText.getText().toString().trim(); // Utilisez trim() pour supprimer les espaces avant et après.
@@ -62,11 +67,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (user != null) {
             // L'utilisateur existe, redirection vers une autre activité
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            Intent intent = new Intent(MainActivity.this, ListShowCompetitionActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
             finish(); // Termine MainActivity pour empêcher le retour à l'écran de connexion
         } else {
             Toast.makeText(this, "Informations d'identification invalides.", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 }
